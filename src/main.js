@@ -33,6 +33,13 @@ function scrollIntoView(selector) {
   scrollTo.scrollIntoView({ behavior: 'smooth'});
 }
 
+//스크롤 내릴시 home 페이드효과 
+const homeContainer = document.querySelector('.home__container');
+const homeContainerHeight = home.getBoundingClientRect().height;
+document.addEventListener('scroll', () => {
+  homeContainer.style.opacity = (homeContainerHeight - window.scrollY) / homeContainerHeight;
+});
+
 //내가 만든 코드
 // //navbar__menu 클릭시 해당 section으로 이동
 // const navbarMenu = document.querySelector('.navbar__menu');
@@ -64,4 +71,13 @@ function scrollIntoView(selector) {
 //     behavior: 'smooth',
 //     block: 'start'
 //   });
+// });
+
+// //home이 위로 올라갈수록 페이드현상 만들기
+// const fade = document.querySelector('.fade');
+// const fadeHeight = fade.getBoundingClientRect().height;
+// window.addEventListener('scroll', () => {
+//   const opacity = (fadeHeight - window.scrollY) / fadeHeight
+//   fade.style.opacity = opacity;
+//   console.log(opacity);
 // });
