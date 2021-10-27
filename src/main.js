@@ -6,6 +6,7 @@ const navbarHeight = navbar.getBoundingClientRect().height;
 document.addEventListener('scroll', () => {
   if(window.scrollY > navbarHeight) {
     navbar.classList.add('navbar--dark');
+    
   } else {
     navbar.classList.remove('navbar--dark');
   }
@@ -28,17 +29,31 @@ homeContactBtn.addEventListener('click', () => {
   scrollIntoView('#contact');
 });
 
-function scrollIntoView(selector) {
-  const scrollTo = document.querySelector(selector);
-  scrollTo.scrollIntoView({ behavior: 'smooth'});
-}
-
 //스크롤 내릴시 home 페이드효과 
 const homeContainer = document.querySelector('.home__container');
 const homeContainerHeight = home.getBoundingClientRect().height;
 document.addEventListener('scroll', () => {
   homeContainer.style.opacity = (homeContainerHeight - window.scrollY) / homeContainerHeight;
 });
+
+//arrow-button 클릭시 home으로 이동
+const arrowButton = document.querySelector('.arrow-button');
+arrowButton.addEventListener('click', () => {
+  scrollIntoView('#home');
+});
+
+document.addEventListener('scroll', () => {
+  if(window.scrollY > homeContainerHeight / 2) {
+    arrowButton.classList.add('visible');
+  } else {
+    arrowButton.classList.remove('visible');
+  }
+});
+
+function scrollIntoView(selector) {
+  const scrollTo = document.querySelector(selector);
+  scrollTo.scrollIntoView({ behavior: 'smooth'});
+}
 
 //내가 만든 코드
 // //navbar__menu 클릭시 해당 section으로 이동

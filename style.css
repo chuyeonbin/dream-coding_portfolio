@@ -483,6 +483,27 @@ p {
   transform: scale(1.1);
 }
 
+.arrow-button {
+  position: fixed;
+  bottom: 10px;
+  right: 30px;
+  width: 70px;
+  height: 70px;
+  font-size: var(--font-large);
+  border-radius: 50%;
+  background-color: var(--color-dark-blue);
+  color: var(--color-white);
+  transition: all var(--annimation-duration) ease-in;
+  pointer-events: none;
+  opacity: 0;
+}
+
+.arrow-button.visible {
+  pointer-events: visible;
+  opacity: 1;
+  bottom: 20px;
+}
+
 @media screen and (max-width: 768px) {
   /* Navbar */
   .navbar__toggle-btn {
