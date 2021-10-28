@@ -59,6 +59,14 @@ workBtnContainer.addEventListener('click', (event) => {
   if(filter == null) {
     return;
   }
+
+  //이전 아이템에 액티브 상태 지우고 새로운 아이템에 액티브 상태 
+  const active = document.querySelector('.category__btn.selected');
+  active.classList.remove('selected');
+
+  const target = event.target.nodeName === 'BUTTON' ? event.target : event.target.parentNode;
+  target.classList.add('selected');
+
   projectContainer.classList.add('anim-out');
   setTimeout(() => {
     projects.forEach(project => {
