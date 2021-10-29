@@ -20,8 +20,15 @@ navbarMenu.addEventListener('click', (event) => {
   if(link == null) {
     return;
   }
+  navbarMenu.classList.remove('open');
   console.log(event.target.dataset.link);
   scrollIntoView(link);
+});
+
+//navbar toggle 버튼 클릭시 메뉴 띄우기
+const navbarToggleBtn = document.querySelector('.navbar__toggle-btn');
+navbarToggleBtn.addEventListener('click', () => {
+  navbarMenu.classList.toggle('open');
 });
 
 const homeContactBtn = document.querySelector('.home__contact');
