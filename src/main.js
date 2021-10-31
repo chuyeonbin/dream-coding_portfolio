@@ -6,7 +6,6 @@ const navbarHeight = navbar.getBoundingClientRect().height;
 document.addEventListener('scroll', () => {
   if(window.scrollY > navbarHeight) {
     navbar.classList.add('navbar--dark');
-    
   } else {
     navbar.classList.remove('navbar--dark');
   }
@@ -21,7 +20,7 @@ navbarMenu.addEventListener('click', (event) => {
     return;
   }
   navbarMenu.classList.remove('open');
-  console.log(event.target.dataset.link);
+  console.log(target.dataset.link);
   scrollIntoView(link);
 });
 
@@ -91,6 +90,49 @@ function scrollIntoView(selector) {
   const scrollTo = document.querySelector(selector);
   scrollTo.scrollIntoView({ behavior: 'smooth'});
 }
+
+const sectionIds = [
+  '#home',
+  '#about',
+  '#skills',
+  '#work',
+  '#testimonials',
+  '#contact'
+];
+const sections = sectionIds.map(id => document.querySelector(id));
+const navItems = sectionIds.map(id => document.querySelector(`[data-link="${id}"]`));
+let selectedNavIndex = 0;
+let selectedNavItem = navItems[0];
+
+function selectNavItem(selected) {
+  selectedNavItem.classList.remove('active');
+  selectedNavItem = selected;
+  selectedNavItem.classList.add('active');
+}
+
+const observerOptions = {
+  root: null,
+  rootMargin: '0px',
+  threshold: 0.5
+}
+const observerCallback = entries => {
+  entries.forEach(entry => {
+    if(!entry.isIntersecting && entry.intersectionRatio > 0) {
+      console.dir(`target: ${entry.target.id}, isIntersecting: ${entry.isIntersecting}, intersectionRatio: ${entry.intersectionRatio}, bounding: ${entry.boundingClientRect.y}`);
+      const index = sectionIds.indexOf(`#${entry.target.id}`);
+      if(entry.boundingClientRect.y < 0) {
+        selectedNavIndex = index + 1;
+        selectNavItem(navItems[selectedNavIndex]);
+      } else {
+        selectedNavIndex = index - 1;
+        selectNavItem(navItems[selectedNavIndex]);
+      }
+    }
+  });
+}
+const observer = new IntersectionObserver(observerCallback, observerOptions);
+sections.forEach(section => observer.observe(section));
+
 //내가 만든 코드
 // //navbar__menu 클릭시 해당 section으로 이동
 // const navbarMenu = document.querySelector('.navbar__menu');

@@ -137,11 +137,15 @@ p {
   margin: 0 4px;
   cursor: pointer;
   border: 1px solid transparent;
+  border-radius: var(--size-border-radius);
+}
+
+.navbar__menu__item.active {
+  border-color: var(--color-white);
 }
 
 .navbar__menu__item:hover {
   border-color: var(--color-white);
-  border-radius: var(--size-border-radius);
   background-color: var(--color-dark-blue);
 }
 
